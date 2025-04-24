@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Wishlist</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f3f3f3;
+      padding: 20px;
+    }
+
+    .wishlist-container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 30px;
+      background-color: white;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      border-radius: 10px;
+    }
+
+    .wishlist-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 20px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .wishlist-item img {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+
+    .wishlist-item-details {
+      flex: 1;
+      margin-left: 20px;
+    }
+
+    .wishlist-item-details h3 {
+      font-size: 1.25rem;
+      color: #333;
+    }
+
+    .wishlist-item-details p {
+      font-size: 1rem;
+      color: #777;
+    }
+
+    .remove-btn {
+      background-color: #d63384;
+      color: white;
+      padding: 10px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .remove-btn:hover {
+      background-color: #c0256d;
+    }
+
+    .back-btn {
+      display: inline-block;
+      margin-top: 20px;
+      background-color: #007bff;
+      color: white;
+      border-radius: 8px;
+      padding: 12px 20px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .back-btn:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <div class="wishlist-container">
+    <h1>Your Wishlist</h1>
+    <div id="wishlistItems"></div>
+    <a href="index.html" class="back-btn">Back to Shop</a>
+  </div>
+
+  <script src="wishlist.js"></script>
+  <script>
+    // Check if there are any items in the wishlist in localStorage
+const wishlistItems = JSON.parse(localStorage.getItem("wishlist")) || [];
+
+function renderWishlist() {
+  const wishlistContainer = document.getElementById("wishlistItems");
+
+  if (wishlistItems.length === 0) {
+    wishlistContainer.innerHTML = `<p>Your wishlist is empty.</p>`;
+  } else {
+    wishlistContainer.innerHTML = wishlistItems
+      .map((item, index) => `
+        <div class="wishlist-item">
+          <img src="${item.image}" alt="${item.name}" />
+          <div class="wishlist-item-details">
+            <h3>${item.name}</h3>
+            <p>${item.description}</p>
+            <p>Price: ₹${item.price}</p>
+          </div>
+          <button class="remove-btn" onclick="removeFromWishlist(${index})">Remove</button>
+        </div>
+      `)
+      .join('');
+  }
+}
+
+// Remove item from wishlist
+function removeFromWishlist(index) {
+  wishlistItems.splice(index, 1);
+  localStorage.setItem("wishlist", JSON.stringify(wishlistItems));
+  renderWishlist(); // Re-render wishlist
+}
+
+// Initial render
+renderWishlist();
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Order Confirmed - Thank You!</title>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <style>
+  
+  body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f3f3f3;
+      padding: 30px;
+      text-align: center;
+    }
+
+    .success-box {
+      background: #fff;
+      padding: 40px;
+      max-width: 600px;
+      margin: auto;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      border-radius: 15px;
+      position: relative;
+    }
+
+    .success-box h1 {
+      color: #28a745;
+      font-size: 2rem;
+    }
+
+    .success-box p {
+      font-size: 1rem;
+      margin-top: 10px;
+      color: #333;
+    }
+
+    .invoice {
+      margin-top: 20px;
+      padding: 20px;
+      border: 2px dashed #ccc;
+      background: #fafafa;
+      text-align: left;
+    }
+
+    .invoice h3 {
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 5px;
+      margin-bottom: 15px;
+    }
+
+    .back-btn {
+      display: inline-block;
+      margin-top: 25px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1rem;
+      text-decoration: none;
+    }
+
+    .back-btn:hover {
+      background-color: #0056b3;
+    }
+
+    @media print {
+      body * {
+        visibility: hidden;
+      }
+      .success-box, .success-box * {
+        visibility: visible;
+      }
+      .back-btn {
+        display: none;
+      }
+    }
+  
+    button[type="submit"] {
+  transition: transform 0.2s ease;
+}
+button[type="submit"]:hover {
+  transform: scale(1.05);
+  background-color: #d63384;
+  color: white;
+}
+
+  
+  </style>
+</head>
+<body>
+    <div class="success-box">
+        <h1>✅ Thank You for Your Purchase!</h1>
+        <p>We've received your order and it's being processed.</p>
+        <p style="color: #555;">📧 A confirmation email has been sent to <strong id="emailDisplay">your email</strong>.</p>
+        <p>📦 Estimated Delivery: <strong id="deliveryDate"></strong></p>
+    
+        <div class="invoice" id="invoice">
+          <h3>🧾 Order Invoice</h3>
+          <p><strong>Name:</strong> <span id="nameDisplay"></span></p>
+          <p><strong>Address:</strong> <span id="addressDisplay"></span></p>
+          <p><strong>City:</strong> <span id="cityDisplay"></span></p>
+          <p><strong>Postal Code:</strong> <span id="postalDisplay"></span></p>
+          <p><strong>Shipping:</strong> <span id="shippingDisplay"></span></p>
+          <p><strong>Payment:</strong> <span id="paymentDisplay"></span></p>
+          <p><strong>Total Amount:</strong> ₹<span id="totalDisplay">0</span></p>
+        </div>
+    
+        <button class="back-btn" onclick="window.print()">🖨️ Print Invoice</button>
+        <a href="index.html" class="back-btn">🏠 Back to Home</a>
+      </div>
+    
+      <canvas id="confetti"></canvas>
+
+  <!-- Confetti Script -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+  <script>
+    // pull from sessionStorage instead of localStorage
+  const order = JSON.parse(sessionStorage.getItem("lastOrder") || '{}');
+  // now you can clear it if you'd like
+  sessionStorage.removeItem("lastOrder");
+
+  // populate fields
+  document.getElementById("nameDisplay").innerText = order.name || "-";
+  document.getElementById("addressDisplay").innerText = order.address || "-";
+  document.getElementById("cityDisplay").innerText = order.city || "-";
+  document.getElementById("postalDisplay").innerText = order.postal || "-";
+  document.getElementById("shippingDisplay").innerText = order.shippingMethod || "-";
+  document.getElementById("paymentDisplay").innerText = order.payment || "-";
+  document.getElementById("emailDisplay").innerText = order.email || "your email";
+  document.getElementById("totalDisplay").innerText = order.total || "0";
+
+  // delivery estimate
+  const today = new Date();
+  const estimated = new Date(today.getTime() + (Math.floor(Math.random() * 4) + 2) * 86400000);
+  document.getElementById("deliveryDate").innerText = estimated.toDateString();
+
+  // confetti
+  function shootConfetti() {
+    const duration = 3 * 1000;
+    const end = Date.now() + duration;
+    const colors = ['#bb0000', '#ffffff', '#ffdd00'];
+
+    (function frame() {
+      confetti({ particleCount: 2, angle: 60, spread: 55, origin: { x: 0 }, colors });
+      confetti({ particleCount: 2, angle: 120, spread: 55, origin: { x: 1 }, colors });
+      if (Date.now() < end) requestAnimationFrame(frame);
+    })();
+  }
+
+  const script = document.createElement("script");
+  script.src = "https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js";
+  script.onload = shootConfetti;
+  document.head.appendChild(script);
+  </script>
+
+</body>
+</html>
+
+
+

@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Checkout - Jewellery Store</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --main-color: #cab273;
+      --main-light-color: #fffbf0;
+      --secondary-color: #551756;
+    }
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+}
+
+/* Navigation Bar */
+nav {
+    background-color: #222;
+    padding: 15px;
+    text-align: center;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 15px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+}
+nav ul li a:hover {
+     color: var(--main-color);
+     }
+       /* dark-theme */
+.theme-toggle {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  margin-left: 20px;
+  transition: transform 0.3s ease;
+  color: inherit;
+}
+.theme-toggle:hover {
+  transform: rotate(20deg);
+}
+
+.dark-theme {
+  background-color: #161414;
+  color: #f2ebeb;
+}
+
+.dark-theme .navbar,
+.dark-theme .search-header,
+.dark-theme .product-card ,
+.dark-theme .dropdown-menu,
+.dark-theme .dropdown-menu-sub {
+  background-color: #1e1e1e;
+  color: #fff;
+}
+.dark-theme input,
+.dark-theme button {
+  background-color: #2a2a2a;
+  color: #ffffff;
+  border: 1px solid #615555;
+}
+
+
+    h2 {
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    .checkout-wrapper {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    .checkout-left {
+      flex: 2;
+      background: #fff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    .checkout-left form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .checkout-left label {
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    .checkout-left input,
+    .checkout-left select {
+      padding: 10px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+
+    .checkout-left button {
+      background-color: #bfa27a;
+      color: white;
+      padding: 12px;
+      border: none;
+      border-radius: 6px;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+
+    .checkout-right {
+      flex: 1;
+      background: #fff;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      height: fit-content;
+    }
+
+    .order-summary h3 {
+      margin-bottom: 15px;
+    }
+
+    .order-summary ul {
+      list-style: none;
+      padding: 0;
+      margin-bottom: 20px;
+    }
+
+    .order-summary li {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+
+    .order-total {
+      font-weight: bold;
+      font-size: 1.1rem;
+    }
+
+    @media(max-width: 768px) {
+      .checkout-wrapper {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="product.html">Product</a></li>
+            <li><a href="cart.html">Cart</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="login.html">Login</a></li>
+              <!-- 🌙 Theme Toggle Button -->
+  <button onclick="toggleTheme()" class="theme-toggle" id="themeToggle">🌙</button>
+        </ul>
+    </nav>
+    <div class="checkout-wrapper">
+        <!-- LEFT SIDE - FORM -->
+        <div class="checkout-left">
+          <h2>Checkout</h2>
+          <form id="checkout-form">
+    
+            <!-- Billing Info -->
+            <div>
+              <label for="name">Full Name</label>
+              <input type="text" id="name" name="name" required />
+            </div>
+    
+            <div>
+              <label for="email">Email Address</label>
+              <input type="email" id="email" name="email" required />
+            </div>
+    
+            <div>
+              <label for="address">Billing Address</label>
+              <input type="text" id="address" name="address" required />
+            </div>
+    
+            <div>
+              <label for="city">City</label>
+              <input type="text" id="city" name="city" required />
+            </div>
+    
+            <div>
+              <label for="postal">Postal Code</label>
+              <input type="text" id="postal" name="postal" required />
+            </div>
+    
+            <!-- Shipping Method -->
+            <div>
+              <label for="shipping">Shipping Method</label>
+              <select id="shipping" name="shipping">
+                <option value="99">Standard Shipping (₹99)</option>
+                <option value="199">Express Shipping (₹199)</option>
+              </select>
+            </div>
+    
+            <!-- Payment Method -->
+            <div>
+              <label for="payment">Payment Method</label>
+              <select id="payment" name="payment">
+                <option value="card">Credit / Debit Card</option>
+                <option value="cod">Cash on Delivery</option>
+                <option value="upi">UPI / Net Banking</option>
+              </select>
+            </div>
+    
+            <button type="submit">Place Order</button>
+          </form>
+        </div>
+    
+        <!-- RIGHT SIDE - ORDER SUMMARY -->
+        <div class="checkout-right">
+          <div class="order-summary">
+            <h3>Order Summary</h3>
+            <ul id="item-list"></ul>
+            <div class="order-total" id="total">Total: ₹0</div>
+          </div>
+        </div>
+      </div>
+    
+<script>
+              /* for dark theme */
+function toggleTheme() {
+  const body = document.body;
+ 
+  document.body.classList.toggle('dark-theme');
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const itemList = document.getElementById('item-list');
+    const totalDisplay = document.getElementById('total');
+    const shippingSelect = document.getElementById('shipping');
+    let subtotal = 0;
+
+    cart.forEach(item => {
+      const quantity = item.quantity || 1;
+      const itemTotal = item.price * quantity;
+      subtotal += itemTotal;
+
+      const li = document.createElement('li');
+      li.textContent = `${item.name} × ${quantity} - ₹${itemTotal.toFixed(2)}`;
+      itemList.appendChild(li);
+    });
+
+    function updateTotal() {
+      const shippingCost = parseFloat(shippingSelect.value);
+      const grandTotal = subtotal + shippingCost;
+      totalDisplay.textContent = `Total: ₹${grandTotal.toFixed(2)}`;
+      return grandTotal;
+    }
+
+    shippingSelect.addEventListener('change', updateTotal);
+    updateTotal();
+
+    document.getElementById('checkout-form').addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      // Basic form validation
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const address = document.getElementById('address').value.trim();
+
+      if (!name || !email || !address) {
+        alert("Please fill in all required fields.");
+        return;
+      }
+
+      const shipping = parseFloat(shippingSelect.value);
+      const grandTotal = updateTotal();
+
+      const orderDetails = {
+        name,
+        email,
+        address,
+        city: document.getElementById("city").value.trim(),
+        postal: document.getElementById("postal").value.trim(),
+        shippingMethod: shipping === 99 ? "Standard" : "Express",
+        total: `₹${grandTotal.toFixed(2)}`,
+        items: cart
+      };
+
+      // Save order in sessionStorage
+      sessionStorage.setItem("lastOrder", JSON.stringify(orderDetails));
+
+      // Clear cart and redirect
+      localStorage.removeItem("cart");
+      window.location.href = "success.html";
+    });
+  });
+
+  
+ 
+
+</script>
+</body>
+</html>

@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jewelry Categories | Sparkle Store</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Global Styles */
+        :root {
+      --main-color: #cab273;
+      --main-light-color: #fffbf0;
+      --secondary-color: #551756;
+    }
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+}
+
+/* Navigation Bar */
+nav {
+    background-color: #222;
+    padding: 15px;
+    text-align: center;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 15px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+}
+nav ul li a:hover {
+     color: var(--main-color);
+     }
+       /* dark-theme */
+.theme-toggle {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  margin-left: 20px;
+  transition: transform 0.3s ease;
+  color: inherit;
+}
+.theme-toggle:hover {
+  transform: rotate(20deg);
+}
+
+.dark-theme {
+  background-color: #121212;
+  color: #ffffff;
+}
+
+.dark-theme .navbar,
+.dark-theme .search-header,
+.dark-theme .product-card ,
+.dark-theme .dropdown-menu,
+.dark-theme .dropdown-menu-sub {
+  background-color: #1e1e1e;
+  color: #fff;
+}
+.dark-theme input,
+.dark-theme button {
+  background-color: #2a2a2a;
+  color: #ffffff;
+  border: 1px solid #444;
+}
+
+/* Hero Section */
+.hero {
+    text-align: center;
+    padding: 50px 20px;
+    background: url('images/jewelry-banner.jpg') no-repeat center center/cover;
+    color: #878f2e;
+}
+
+.hero h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+/* Category Section */
+.category-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 40px 0;
+}
+
+.category-card {
+    width: 280px;
+    margin: 15px;
+    text-align: center;
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    overflow: hidden; 
+    position: relative;
+}
+
+.category-card img {
+    width: 100%;
+    border-radius: 10px;
+    display:block ;
+    transition: opacity 0.3s;
+}
+
+.category-card h3 {
+    margin-top: 10px;
+    font-size: 1.3rem;
+    color: #444;
+}
+
+.category-card:hover {
+    transform: scale(1.05);
+}
+
+.category-card:hover img {
+    opacity: 0.8;
+}
+
+.add-cart-btn {
+    margin-top: 10px;
+    padding: 10px 15px;
+    background-color: #878f2e;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.add-cart-btn:hover {
+    background-color: #6c7424;
+}
+
+
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="product.html">Product</a></li>
+            <li><a href="cart.html">Cart</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="login.html">Login</a></li>
+              <!-- 🌙 Theme Toggle Button -->
+  <button onclick="toggleTheme()" class="theme-toggle" id="themeToggle">🌙</button>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Discover Timeless Beauty</h1>
+        <p>Explore our exclusive jewelry collections</p>
+    </section>
+
+    <!-- Category Section -->
+    <section class="category-container">
+        <div class="category-card" onclick="filterCategory('earrings')">
+            <img src="earring4.webp" alt="Earrings">
+            <h3>Gold Earrings</h3>
+            <div class="price">₹60,300</div>
+            <button class="add-cart-btn" onclick="event.stopPropagation(); addToCart('Earrings','earring4.webp',1200)">Add to Cart</button>
+        </div>
+
+        <div class="category-card" onclick="filterCategory('earrings')">
+            <img src="middle2.png" alt="Earrings">
+            <h3> Ruby Earrings</h3>
+            <div class="price">₹1,50,280</div>
+            <button class="add-cart-btn" onclick="event.stopPropagation(); addToCart('Earrings','middle2.png',1200)">Add to Cart</button>
+        </div>
+
+        <div class="category-card" onclick="filterCategory('earrings')">
+            <img src="eartop1.jpeg" alt="Earrings">
+            <h3> Ruby Earrings</h3>
+            <div class="price">₹20,280</div>
+            <button class="add-cart-btn" onclick="event.stopPropagation(); addToCart('Earrings','eartop1.jpeg',1200)">Add to Cart</button>
+        </div>
+
+        <div class="category-card" onclick="filterCategory('necklaces')">
+            <img src="blogImg1.png" alt="Necklaces">
+            <h3>Necklaces</h3>
+            <div class="price">₹89,500</div>
+            <button class="add-cart-btn" onclick="event.stopPropagation(); addToCart('Necklaces','blogImg1.png',89500)">Add to Cart</button>
+        </div>
+
+        <div class="category-card" onclick="filterCategory('necklaces')">
+            <img src="neckpiece1.webp" alt="Necklaces">
+            <h3>Necklaces</h3>
+            <div class="price">₹35,500</div>
+            <button class="add-cart-btn" onclick="event.stopPropagation(); addToCart('Necklaces','neckpiece1.webp',35500)">Add to Cart</button>
+        </div>
+
+        <div class="category-card" onclick="filterCategory('rings')">
+            <img src="blogImg3.png" alt="Rings">
+            <h3>Rings</h3>
+            <div class="price">₹31,700</div>
+            <button class="add-cart-btn" onclick="event.stopPropagation(); addToCart('Rings','blogImg3.png',1700)">Add to Cart</button>
+        </div>
+
+        <div class="category-card" onclick="filterCategory('bracelets')">
+            <img src="middle4.png" alt="Bracelets">
+            <h3>Bracelets</h3>
+            <div class="price">₹43,800</div>
+            <button class="add-cart-btn" onclick="event.stopPropagation(); addToCart('Bracelets','middle4.png',1800)">Add to Cart</button>
+        </div>
+
+        <div class="category-card" onclick="filterCategory('anklets')">
+            <img src="anklets1.avif" alt="Bracelets">
+            <h3>Anklets</h3>
+            <div class="price">₹22,500</div>
+            <button class="add-cart-btn" onclick="event.stopPropagation(); addToCart('Anklets','anklets1.avif',22500)">Add to Cart</button>
+        </div>
+
+        <div class="category-card" onclick="filterCategory('earpiece')">
+            <img src="earpiece2.jpg" alt="Bracelets">
+            <h3>Earpiece</h3>
+            <div class="price">₹63,000</div>
+            <button class="add-cart-btn" onclick="event.stopPropagation(); addToCart('Earpiece','earpiece2.jpg',63000)">Add to Cart</button>
+        </div>
+
+        <div class="category-card" onclick="filterCategory('earpiece')">
+            <img src="earpiece4.webp" alt="Bracelets">
+            <h3>Earpiece</h3>
+            <div class="price">₹63,000</div>
+            <button class="add-cart-btn" onclick="event.stopPropagation(); addToCart('Earpiece','earpiece4.webp',63000)">Add to Cart</button>
+        </div>
+
+        <div class="category-card" onclick="filterCategory('earpiece')">
+            <img src="earpiece5.jpg" alt="Bracelets">
+            <h3>Earpiece</h3>
+            <div class="price">₹63,829</div>
+            <button class="add-cart-btn" onclick="event.stopPropagation(); addToCart('Earpiece','earpiece5.jpg',63829)">Add to Cart</button>
+        </div>
+    </section>
+
+    <script >
+          /* for dark theme */
+function toggleTheme() {
+  const body = document.body;
+ 
+  document.body.classList.toggle('dark-theme');
+}
+        // Function to filter category (Redirecting to products page with filter)
+function filterCategory(category) {
+    alert("You selected " + category + "! (Redirecting...)");
+    window.location.href = "product.html?category=" + category;
+}
+
+function addToCart(name, img, price) {
+      const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+      cart.push({ name, img, price, quantity: 1 });
+      localStorage.setItem('cart', JSON.stringify(cart));
+      alert(`${name} added to cart!`);
+    }
+ 
+
+</script>
+</body>
+</html>
